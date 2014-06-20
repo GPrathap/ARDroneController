@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><style type="text/css"></style>
+  <meta charset="utf-8">
+   <link rel="stylesheet" href="arcss/Drone.css">
+   <link rel="stylesheet" href="arjs/css/jquery-ui.css">
+  <script src="arjs/jquery-1.js"></script>
+  <script src="arjs/jquery-ui.js"></script>
+   <script src="arjs/socket.io.min.js"></script>
+  <script src="arjs/nodecopter-client.js"></script>
+  <script src="arjs/lib/three.min.js"></script>
+  <script src="arjs/lib/Coordinates.js"></script>
+  <script src="arjs/lib/OrbitAndPanControls.js"></script>
+  <script src="arjs/lib/stats.min.js"></script>
+  <script src="arjs/lib/dat.gui.min.js"></script>
+
+  
+  
+
+
+<script type="text/javascript" src="arjs/controalw.js"></script>
+<script type="text/javascript" src="arjs/MainControl.js"></script>
+<script type="text/javascript" src="arjs/nodecopter-client.js"></script>
+<script type="text/javascript" src="arjs/socket.io.min.js"></script>
+
+<script type="text/javascript">
+	$(function () {
+	startArDroneController();
+	startArDRoneVideo();
+	 function startArDRoneVideo() {
+                new NodecopterStream(document.getElementById("video"), {port: 3001});
+         }
+	//startArDRoneVideo();
+	
+	});
+	
+</script>
+  <script type="text/javascript" src="arjs/progressbarControl.js"> </script>
+  
+  <style>
+  #progressbar,#progressbar1,#progressbar2 .ui-progressbar-value {
+    background-color: #ccc;
+  }
+  
+  </style>
+</head>
+<body>
+	<div class="velocityC">
+	<button id="opener" style="margin-left:20px;">Open AR drone state</button>
+<div id="part1" class="velocity" style="top:30px;box-shadow: 20px 5px 5px #888888;">
+	<span id="titleVelo">Velocity  x y and z components<br></span>
+	<span >X components :<span id="Velocityx"></span></span><br>
+	<span >Y components :<span id="Velocityy"></span></span><br>
+	<span >Z components :<span id="Velocityz"></span></span><br>
+	<span id="finalVelocity">Final Velocity :<span id="Velocityfinal"></span></span><br>
+	<span >  <br></span>
+	<span id="Accelerometers">Accelerometers<br></span>
+	<span >X components :<span id="Accelerometersx"></span></span><br>
+	<span >Y components :<span id="Accelerometersy"></span></span><br>
+	<span >Z components :<span id="Accelerometersz"></span></span><br>
+	<span >  <br></span>
+	<span id="gyrometers">Gyrometers<br></span>
+	<span >X components :<span id="gyrometersx"></span></span><br>
+	<span >Y components :<span id="gyrometersy"></span></span><br>
+	<span >Z components :<span id="gyrometersz"></span></span><br>
+
+ <div id="bettery" class="batteryandstuff">
+ 	<span id="betteryid">Battery Level:<br></span>
+ 		<div class="ui-progressbar ui-widget ui-widget-content ui-corner-all" id="betteryprogressbar" style="width:210px;"></div>
+ 	</div>
+  
+ </div>
+ <div style="position: relative; margin: 40px; top:-340px;">
+<div margin-left="200" height="500" border-radius="5" width="500"  id="canvasOne" >
+</div>
+<script src="arjs/3DObjectControler/3dObjectControler.js"></script>	
+<div id="video"  style="position: relative; top:-500px;left:750px;" height="500" width="500" >
+</div>
+<div style="position: relative;left:860px;top:-500px"><button id="snap">Snap Photo</button><button id="plat" >PLAY</button><button id="pause" >PAUSE</button></div>
+		<div id="toolbar" class="ui-widget-header ui-corner-all" style="position: relative;  top:-350px;z-index=123445;">
+  <button id="takeoff">Takeoff</button>
+  <button id="land">Land</button>
+  <button id="up">Up</button>
+  <button id="down">Down</button>
+  <button id="left">Left</button>
+  <button id="right">Right</button>
+  <button id="front">Front</button>
+  <button id="back">Back</button>
+  <button id="clockwise">Clockwise</button>
+  <button id="counter-clockwise">Conter-clockwise</button>
+  <button id="recover">Stop</button>
+
+ 
+</div>
+
+</div>
+ <div class="selector1" style="position: relative; margin: 40px; top:-900px;box-shadow: 20px 5px 5px #888888; ">
+ 	<select id="selector">
+  			<option value="up">Up</option>
+  			<option value="down">Down</option>
+  			<option value="left">Left</option>
+  			<option value="right">Right</option>
+  			<option value="front">Front</option>
+  			<option value="back">Back</option>
+  			<option value="clockwise">Clockwise</option>
+  			<option value="counter-clockwise">Counter-Clockwise</option>
+	</select> 
+	<span >Speed:</span><input type="number" name="speed" id="speed2" size="5"/><span > Distance:<span id="dura"></span>m</span>
+	
+ 
+	<div id="slider" style="position: relative; margin: 10px; top:-35px;width:400px;margin-left: 440px;"></div>
+	<span id="datademo" style="position: relative; margin: 10px; top:-64px;width:400px;left: 840px;">Total time to take this task: <span id="takedata"></span></span></div>
+<div class="selector1" style="position: relative; margin: 40px; top:-820px;box-shadow: 20px 5px 5px #888888; ">
+ 	<select id="selector3">
+  			<option value="phiM30Deg">phiM30Deg</option>
+                    <option value="phi30Deg">phi30Deg</option>
+                    <option value="thetaM30Deg">thetaM30Deg</option>
+                    <option value="theta30Deg">theta30Deg</option>
+                    <option value="theta20degYaw200deg">theta20degYaw200deg</option>
+                    <option value="theta20degYawM200deg">theta20degYawM200deg</option>
+                    <option value="turnaround">turnaround</option>
+                    <option value="turnaroundGodown">turnaroundGodown</option>
+                    <option value="yawShake">yawShake</option>
+                    <option value="yawDance">yawDance</option>
+                    <option value="phiDance">phiDance</option>
+                    <option value="thetaDance">thetaDance</option>
+                    <option value="vzDance">vzDance</option>
+                    <option value="wave">wave</option>
+                    <option value="phiThetaMixed">phiThetaMixed</option>
+                    <option value="doublePhiThetaMixed">doublePhiThetaMixed</option>
+                    <option value="flipAhead">flipAhead</option>
+                    <option value="flipBehind">flipBehind</option>
+                    <option value="flipLeft">flipLeft</option>
+                    <option value="flipRight">flipRight</option>
+	</select> 
+	<span > Duration: <span id="duru"></span> s</span><div id="slider1" style="width:400px;position: relative; margin: 10px;top:-25px;width:400px;margin-left: 330px;"> </div>
+	<select id="selector4" >
+  			<option value="blinkGreenRed">blinkGreenRed</option> 
+
+              <option value="blinkGreen">blinkGreen</option>
+                    <option value="blinkOrange">blinkOrange</option>
+                    <option value="snakeGreenRed">snakeGreenRed</option>
+                    <option value="fire">fire</option>
+                    <option value="standard">standard</option>
+                    <option value="red">red</option>
+                    <option value="green">green</option>
+                    <option value="redSnake">redSnake</option>
+                    <option value="blank">blank</option>
+                    <option value="rightMissile">rightMissile</option>
+                    <option value="leftMissile">leftMissile</option>
+                    <option value="doubleMissile">doubleMissile</option>
+                    <option value="frontLeftGreenOthersRed">frontLeftGreenOthersRed</option>
+                    <option value="frontRightGreenOthersRed">frontRightGreenOthersRed</option>
+                    <option value="frontRightGreenOthersRed">frontRightGreenOthersRed</option>
+                    <option value="rearRightGreenOthersRed">rearRightGreenOthersRed</option>
+                    <option value="leftGreenRightRed">leftGreenRightRed</option>
+                    <option value="leftRedRightGreen">leftRedRightGreen</option>
+                    <option value="blinkStandard">blinkStandard</option>
+	</select> 
+	<span > Duration: <span id="duru1"></span> s</span><div id="slider2" style="width:400px;position: relative; margin: 10px;top:-29px;width:400px;margin-left: 330px;"> </div>
+ </div>
+ <div id="dialog" title="AR drone" style="z-index: 23456789;">
+		<div id="tabs">
+			<ul>
+				<li><a href="#tabs-1">DroneState</a></li>
+				<li><a href="#tabs-2">Raw Measures</a></li>
+				<li><a href="#tabs-3">PWM</a></li>
+			</ul>
+		<div id="tabs-1">
+	<ul>
+		<li id="32">"flying"</li>
+        <li id="1">"videoEnabled"</li>
+        <li id="2">"visionEnabled"</li>
+        <li id="3">"controlAlgorithm"</li>
+        <li id="4">"altitudeControlAlgorithm"</li>
+        <li id="5">"startButtonState"</li>
+        <li id="6">"controlCommandAck"</li>
+        <li id="7">"cameraReady"</li>
+        <li id="8">"travellingEnabled"</li>
+        <li id="9">"usbReady"</li>
+        <li id="10">"navdataDemo"</li>
+        <li id="11">"navdataBootstrap"</li>
+        <li id="12">"motorProblem"</li>
+        <li id="13">"communicationLost"</li>
+        <li id="14">"softwareFault"</li>
+        <li id="15">"lowBattery"</li>
+        <li id="16">"userEmergencyLanding"</li>
+        <li id="17">"timerElapsed"</li>
+        <li id="18">"MagnometerNeedsCalibration"</li>
+        <li id="19">"anglesOutOfRange"</li>
+        <li id="20">"tooMuchWind"</li>
+        <li id="21">"ultrasonicSensorDeaf"</li>
+        <li id="22">"cutoutDetected"</li>
+        <li id="23">"picVersionNumberOk"</li>
+        <li id="24">"atCodecThreadOn"</li>
+        <li id="25">"navdataThreadOn"</li>
+        <li id="26">"videoThreadOn"</li>
+        <li id="27">"acquisitionThreadOn"</li>
+        <li id="28">"controlWatchdogDelay"</li>
+        <li id="29">"adcWatchdogDelay"</li>
+        <li id="30">"comWatchdogProblem"</li>
+        <li id="31">"emergencyLanding"</li>
+</ul>
+		</div>
+		<div id="tabs-2">
+				<ul>
+					<li id="33">"gyrometers110"</li>
+					<li id="34">"batteryMilliVolt"</li>
+					<li id="35">"usAssociationEcho"</li>
+					<li id="36">"usDistanceEcho"</li>
+					<li id="37">"usCourbeTemps"</li>
+					<li id="38">"usCourbeValeur"</li>
+					<li id="39">"usCourbeRef"</li>
+					<li id="40">"flagEchoIni"</li>
+					<li id="41">"nbEcho"</li>
+					<li id="42"> "sumEcho"</li>
+					<li id="43">"altTempRaw"</li>
+				</ul>
+		</div>
+		<div id="tabs-3">
+			<ul>
+				<li id="44"> "motors"</li>
+				<li id="45"> "satMotors"</li>
+				<li id="46"> "gazFeedForward"</li>
+				<li id="47">"gazAltitude"</li>
+				<li id="48">  "altitudeIntegral"</li>
+				<li id="49">"vzRef"</li>
+				<li id="50"> "uPitch"</li>
+				<li id="51"> "uRoll"</li>
+				<li id="52">"uYaw"</li>
+				<li id="53">  "yawUI"</li>
+				<li id="54"> "uPitchPlanif"</li>
+				<li id="55">  "uGazPlanif"</li>
+				<li id="56"> "motorCurrents"</li>
+				<li id="57">  "altitudeProp"</li>
+				<li id="58"> "altitudeDer"</li>
+			</ul>
+		</div>
+		</div>
+		</div>
+	 
+	<canvas id="canvas" width="500" height="500"></canvas> <image id="theimage"></image>
+</body></html>

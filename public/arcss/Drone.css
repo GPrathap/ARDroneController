@@ -1,0 +1,44 @@
+.velocity{
+  		position:relative;
+  		margin: 20px;
+  		width:200px;
+  		height:auto;
+  		z-index: 100;
+  		
+  	}
+  	#canvasOne{
+  		margin-left: 15px;
+  	}
+  	.batteryandstuff{
+  		position:relative;
+  		margin: 20px;
+  		width:200px;
+  		height:auto;
+  		float:left;
+  		left:-26px;
+  		z-index: 100;
+  	}
+  	#betteryprogressbar{
+  		
+  	}
+  	#finalVelocity{
+  		position:inherit;
+  		margin-top: 20px;
+  	}
+  	#cam {
+    margin: 0 auto;
+    float:right;
+    display: block;
+    border-radius: 5px;
+   
+    border: 3px #050 solid;
+    width: 500px;
+    height: 500px;
+	}
+	#toolbar{
+		z-index:200;
+		
+		margin-top:40px;
+		
+		
+	}
